@@ -7,7 +7,6 @@ const port = process.env.PORT || 5000;
 
 const todoRoutes = require("./routes/todo.routes");
 
-
 app.use(cors());
 app.use(
   bodyParser.urlencoded({
@@ -24,7 +23,7 @@ mongoose
   .then(() => console.log("MongoDB Connected..."))
   .catch((err) => console.log(err));
 
-app.use("/todos", todoRoutes);
+app.use("/", todoRoutes);
 
 app.listen(port, () => {
   console.log(`Server running on port: ${port}`);
