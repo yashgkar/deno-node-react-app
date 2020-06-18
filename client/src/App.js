@@ -12,7 +12,7 @@ function App() {
     <div className="App">
       <div className="container">
         <Router>
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <Link to="/" className="navbar-brand">
               MERN-Stack Todo App
             </Link>
