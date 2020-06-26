@@ -14,7 +14,10 @@ const Todo = (props) => (
       {props.todo.todo_priority}
     </td>
     <td>
+      {/* if using node js use  */}
       <Link to={"/edit/" + props.todo._id}>Edit</Link>
+      {/* if using deno use
+      <Link to={"/edit/" + props.todo._id.$oid}>Edit</Link> */}
     </td>
   </tr>
 );
@@ -23,13 +26,15 @@ export default class TodoList extends Component {
   constructor(props) {
     super(props);
     this.state = { todos: [] };
+    
   }
 
   componentDidMount() {
     axios
-      .get("http://localhost:5005/")
+      .get("http://localhost:5000/")
       .then((response) => {
         this.setState({ todos: response.data });
+        console.log(response.data)
       })
       .catch(function (error) {
         console.log(error);
