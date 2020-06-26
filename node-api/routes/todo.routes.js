@@ -3,7 +3,6 @@ const router = express.Router();
 
 //controllers
 const Tasks = require("../controller/todo.controller");
-const { update } = require("../models/todo.model");
 const getTasks = Tasks.getTasks;
 const getTask = Tasks.getTask;
 const addTask = Tasks.addTask;
