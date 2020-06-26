@@ -27,7 +27,7 @@ export default class TodoList extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:5000/")
+      .get("http://localhost:5005/")
       .then((response) => {
         this.setState({ todos: response.data });
       })

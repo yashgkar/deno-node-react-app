@@ -1,12 +1,12 @@
-import mongo from "../db/mongo.ts";
+import mong from "../db/mongo.ts";
 
 //@desc Get all tasks
 //@route Get /
 
 const getTasks = async ({ response }: { response: any }) => {
-  const Todos = await mongo.find();
+  const Todos = await mong.find();
 
-  response.json(Todos);
+  response.body = Todos;
 };
 
 //@desc Get single task
@@ -19,10 +19,10 @@ const getTask= async ({
   params: { id: string };
   response: any;
 }) => {
-  const task = await mongo.findOne({ _id: { $oid: params.id } });
+  const task = await mong.findOne({ _id: { $oid: params.id } });
 
   if (task) {
-    response.json(task);
+    response.json({task});
   } else {
     response.json({
       success: false,
@@ -50,15 +50,14 @@ const addTask = async ({
       data: "No data provided",
     };
   } else {
-    const task = body.value;
-    await mongo.insertOne({
-      task,
+    
+    await mong.insertOne({
+      todo_description: body.value.todo_description,
+      todo_responsible: body.value.todo_responsible,
+      todo_priority: body.value.todo_priority
     });
     response.status = 201;
-    response.body = {
-      success: true,
-      data: "Task added to pizzas database",
-    };
+    response.json({ todo: "todo added successfully" });
   }
 };
 
@@ -75,7 +74,7 @@ const updateTask = async ({
   request: any;
 }) => {
   const body = await request.body();
-  const task = await mongo.updateOne(
+  const task = await mong.updateOne(
     { _id: { $oid: params.id } },
     {
       $set: {
